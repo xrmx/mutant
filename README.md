@@ -34,7 +34,7 @@ If you want to use the async backend import 'mutant.backends.async' and set up a
 ``` ini
 [uwsgi]
 ...
-import = 'mutant.backends.async'
+import = mutant.backends.async
 mule = 1
 
 ```
