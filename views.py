@@ -1,8 +1,17 @@
-from mutant import enqueue
 from django.http import HttpResponse
 from django.template.loader import render_to_string
 from django.utils.encoding import smart_str
+from django.config import settings
+from django.utils.importlib import import_module
+from  mutant import defaults
 import os
+
+try:
+    backend_file = django.settings.MUTANT_BACKEND
+except:
+    backend_file = defaults.MUTANT_BACKEND
+
+backend = import_module(backend_file)
 
 def pdf_to_response(request,html, output, header='', footer='', opts='', vars_dict = {}, save_as = False, ext_url = False, filename=None):
     """
@@ -26,14 +35,14 @@ def pdf_to_response(request,html, output, header='', footer='', opts='', vars_di
             header = render_local_file(header,vars_dict,'header')
         if footer != '':
             footer = render_local_file(footer,vars_dict,'footer')
-    if enqueue(html, output, header, footer, opts):
+    if backend.enqueue(html, output, header, footer, opts):
         data = None
         with open(output, "rb") as f:
             data = f.read()
         response = HttpResponse(data, mimetype='application/pdf')
         response['X-Sendfile'] = output
         response['Content-Type'] = 'application/pdf'
-        
+
         if not filename:
             filename = output
         response['Content-Disposition'] = 'inline; filename=%s' % filename
