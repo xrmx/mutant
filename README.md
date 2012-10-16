@@ -29,11 +29,21 @@ MUTANT_BACKEND = 'mutant.backends.sync'
 
 ```
 
+uwsgidecorators must be available so an alias is required:
+
+``` ini
+[uwsgi]
+...
+pymodule-alias = uwsgidecorators=../uwsgi-1.3/uwsgidecorators.py
+
+```
+
 If you want to use the async backend import 'mutant.backends.async' and set up at least one mule.
 
 ``` ini
 [uwsgi]
 ...
+pymodule-alias = uwsgidecorators=../uwsgi-1.3/uwsgidecorators.py
 import = mutant.backends.async
 mule = 1
 
