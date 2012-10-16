@@ -1,7 +1,7 @@
 from django.http import HttpResponse
 from django.template.loader import render_to_string
 from django.utils.encoding import smart_str
-from django.config import settings
+from django.conf import settings
 from django.utils.importlib import import_module
 from  mutant import defaults
 import os
