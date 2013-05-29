@@ -13,7 +13,15 @@ Mutant has some dependences:<br/>
 
 ## Usage
 
-First af all you have to configure config.py in mutant package.
+First af all you have to configure mutant in your django project settings.py accordingly with your environment:
+
+```
+MUTANT_WKHTMLTOPDF = '/usr/bin/wkhtmltopdf'
+MUTANT_SOCKET_PATH = './mutant.socket'
+MUTANT_MULE_ID = 1
+MUTANT_TIMEOUT = 30
+
+```
 
 Then, set uwsgi parameters in your ini configuration:
 
